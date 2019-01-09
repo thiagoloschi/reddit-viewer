@@ -9,21 +9,41 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
+
+import Posts from 'components/PostFactory';
+
 import { fetchPosts } from './actions';
 import { makeSelectPosts } from './selectors';
 import reducer from './reducer';
 
 class HomePage extends React.PureComponent {
   static propTypes = {
+    posts: PropTypes.array,
     getPosts: PropTypes.func,
   };
 
   componentDidMount() {
-    this.props.getPosts();
+    const {
+      posts: { children },
+      getPosts,
+    } = this.props;
+
+    if (!children || children.length <= 0) {
+      getPosts();
+    }
   }
 
   render() {
-    return <h1>Posts</h1>;
+    const {
+      posts: { children },
+    } = this.props;
+
+    return (
+      <>
+        <h1>Posts</h1>
+        {children && children.length > 0 && <Posts posts={children} />}
+      </>
+    );
   }
 }
 

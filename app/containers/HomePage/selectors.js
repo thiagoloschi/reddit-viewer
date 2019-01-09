@@ -4,6 +4,6 @@ import { initialState } from './reducer';
 const selectHome = state => state.get('home', initialState);
 
 const makeSelectPosts = () =>
-  createSelector(selectHome, homeState => homeState.get('posts'));
+  createSelector(selectHome, homeState => homeState.get('posts').toJS());
 
 export { selectHome, makeSelectPosts };
