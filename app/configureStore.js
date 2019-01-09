@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
 import { routerMiddleware } from 'connected-react-router/immutable';
 import createSagaMiddleware from 'redux-saga';
+import { middleware as reduxPackMiddleware } from 'redux-pack';
 import createReducer from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -14,7 +15,12 @@ export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [sagaMiddleware, routerMiddleware(history)];
+  // 3. reduxPackMiddleware: Makes redux-pack work
+  const middlewares = [
+    sagaMiddleware,
+    routerMiddleware(history),
+    reduxPackMiddleware,
+  ];
 
   const enhancers = [applyMiddleware(...middlewares)];
 
