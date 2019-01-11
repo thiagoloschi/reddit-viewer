@@ -1,16 +1,33 @@
 import styled from 'styled-components';
 
+export const Wrapper = styled.a.attrs({
+  target: '_blank',
+  rel: 'noreferrer noopener',
+})`
+  display: flex;
+  width: 600px;
+  margin: 0.5rem 0;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+
+  &:hover {
+    border: 1px solid;
+  }
+`;
+
 export const Card = styled.section`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 1rem;
-  margin: 1rem 0;
-  box-shadow: 0 0 1px 0 #ddd;
-  max-width: 60%;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #fff;
   color: #8b8b8b;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
   font-family: 'helvetica';
   font-size: 12px;
+  text-decoration: none;
   text-overflow: ellipsis;
   overflow: hidden;
 `;
@@ -19,7 +36,7 @@ export const Link = styled.a.attrs({
   target: '_blank',
   rel: 'noreferrer noopener',
 })`
-  font-weight: 100;
+  font-weight: 400;
   color: inherit;
   text-decoration: none;
 
@@ -29,19 +46,22 @@ export const Link = styled.a.attrs({
 `;
 
 export const DarkLink = styled(Link)`
-  color: #333;
+  margin: 0.5rem 0;
+  color: #000;
   font-weight: bold;
 `;
 
 export const Thumbnail = styled.img`
   height: auto;
-  margin-left: 1rem;
   border: 1px solid #000;
   border-radius: 4px;
 `;
 
 export const Title = styled.h1`
-  font-size: 14px;
-  font-weight: 500;
+  padding-bottom: 22px;
+  margin-right: 1rem;
   color: black;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
 `;

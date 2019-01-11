@@ -5,6 +5,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     width: 100%;
+    background-color: rgb(218, 225, 230);
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
@@ -22,8 +25,9 @@ const GlobalStyle = createGlobalStyle`
 
   p,
   label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-family: IBMPlexSans, "Helvetica Neue", "Segoe UI", Helvetica, Verdana, Arial, sans-serif;
     line-height: 1.5em;
+    margin: 0;
   }
 `;
 

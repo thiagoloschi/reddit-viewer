@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Card, Link, DarkLink, Thumbnail, Title } from './look';
+import ScoreBar from 'components/ScoreBar';
+import { Wrapper, Card, Link, DarkLink, Thumbnail, Title } from './look';
 
 function PostCard({ data }) {
   const {
@@ -13,6 +14,7 @@ function PostCard({ data }) {
     permalink,
     thumbnail,
     thumbnail_width,
+    score,
     url,
   } = data;
   const createdAt = moment.utc(created_utc * 1000).fromNow();
@@ -24,22 +26,29 @@ function PostCard({ data }) {
   const isThereAThumbnail = !(!thumbnail || thumbnail === 'default');
 
   return (
-    <Card href={commentsLink}>
-      <div>
-        <p>
-          <DarkLink href={subredditLink}>{subreddit_name_prefixed}</DarkLink> •
-          Posted by
-          <Link href={authorLink}> {authorPath} </Link>
-          <Link href={commentsLink}>{createdAt}</Link>
-        </p>
-        <Title>{title}</Title>
-      </div>
-      {isThereAThumbnail && (
-        <Link href={url} title={url}>
-          <Thumbnail alt="thumbnail" src={thumbnail} width={thumbnail_width} />
-        </Link>
-      )}
-    </Card>
+    <Wrapper>
+      <ScoreBar score={score} />
+      <Card href={commentsLink}>
+        <div>
+          <p>
+            <DarkLink href={subredditLink}>{subreddit_name_prefixed}</DarkLink>{' '}
+            • Posted by
+            <Link href={authorLink}> {authorPath} </Link>
+            <Link href={commentsLink}>{createdAt}</Link>
+          </p>
+          <Title>{title}</Title>
+        </div>
+        {isThereAThumbnail && (
+          <Link href={url} title={url}>
+            <Thumbnail
+              alt="thumbnail"
+              src={thumbnail}
+              width={thumbnail_width}
+            />
+          </Link>
+        )}
+      </Card>
+    </Wrapper>
   );
 }
 
