@@ -38,12 +38,7 @@ class HomePage extends React.PureComponent {
       posts: { children },
     } = this.props;
 
-    return (
-      <>
-        <h1>Posts</h1>
-        {children && children.length > 0 && <Posts posts={children} />}
-      </>
-    );
+    return <>{children && children.length > 0 && <Posts posts={children} />}</>;
   }
 }
 

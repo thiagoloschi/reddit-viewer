@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PostCard from 'components/PostCard';
+import { List } from './look';
 
 function PostFactory({ posts }) {
   return (
-    <ul>
-      {posts.map(({ data: { id, title } }) => (
-        <li key={id}>{title}</li>
+    <List>
+      {posts.map(({ data }) => (
+        <li key={data.id}>
+          <PostCard data={data} />
+        </li>
       ))}
-    </ul>
+    </List>
   );
 }
 
