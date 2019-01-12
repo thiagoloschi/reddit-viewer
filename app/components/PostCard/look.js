@@ -1,21 +1,22 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.a.attrs({
-  target: '_blank',
-  rel: 'noreferrer noopener',
-})`
+export const Wrapper = styled.section`
   display: flex;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   margin: 0.5rem 0;
   border: 1px solid rgb(204, 204, 204);
-  border-radius: 4px;
+  border-radius: 0.25rem;
 
   &:hover {
     border: 1px solid;
   }
 `;
 
-export const Card = styled.section`
+export const Card = styled.a.attrs({
+  target: '_blank',
+  rel: 'noreferrer noopener',
+})`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -23,8 +24,8 @@ export const Card = styled.section`
   padding: 0.5rem;
   background-color: #fff;
   color: #8b8b8b;
-  border-bottom-right-radius: 4px;
-  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
   font-family: 'helvetica';
   font-size: 12px;
   text-decoration: none;
@@ -54,7 +55,7 @@ export const DarkLink = styled(Link)`
 export const Thumbnail = styled.img`
   height: auto;
   border: 1px solid #000;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 `;
 
 export const Title = styled.h1`
