@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Dropdown } from './look';
 
 function TopicDropdown({ topics, onChange }) {
   return (
-    <select onChange={onChange}>
+    <Dropdown onChange={onChange}>
       {topics &&
         topics.length > 0 &&
         topics.map(topic => (
@@ -11,7 +12,7 @@ function TopicDropdown({ topics, onChange }) {
             {topic}
           </option>
         ))}
-    </select>
+    </Dropdown>
   );
 }
 
