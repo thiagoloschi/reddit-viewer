@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 
 import Posts from 'components/PostFactory';
+import TopicDropdown from 'components/TopicDropdown';
 
 import { fetchPosts } from './actions';
 import { makeSelectPosts } from './selectors';
@@ -21,6 +22,14 @@ class HomePage extends React.PureComponent {
     posts: PropTypes.array,
     getPosts: PropTypes.func,
   };
+
+  constructor(props) {
+    super(props);
+    this.fetchNewTopic = this.fetchNewTopic.bind(this);
+    this.state = {
+      topics: ['hot', 'new', 'controversial', 'top', 'rising'],
+    };
+  }
 
   componentDidMount() {
     const {
@@ -33,12 +42,22 @@ class HomePage extends React.PureComponent {
     }
   }
 
+  fetchNewTopic({ target: { value } }) {
+    this.props.getPosts(value);
+  }
+
   render() {
     const {
       posts: { children },
     } = this.props;
+    const { topics } = this.state;
 
-    return <>{children && children.length > 0 && <Posts posts={children} />}</>;
+    return (
+      <>
+        <TopicDropdown topics={topics} onChange={this.fetchNewTopic} />
+        {children && children.length > 0 && <Posts posts={children} />}
+      </>
+    );
   }
 }
 

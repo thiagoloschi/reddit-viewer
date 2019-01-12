@@ -23,7 +23,12 @@ function PostCard({ data }) {
   const authorLink = `${homePath}/user/${author}`;
   const commentsLink = `${homePath}${permalink}`;
   const authorPath = `u/${author}`;
-  const isThereAThumbnail = !(!thumbnail || thumbnail === 'default');
+  const isThereAThumbnail = !(
+    !thumbnail ||
+    thumbnail === 'default' ||
+    thumbnail === 'self' ||
+    thumbnail === 'spoiler'
+  );
 
   return (
     <Wrapper>
