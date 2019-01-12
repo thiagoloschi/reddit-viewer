@@ -2,13 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from './look';
 
-function TopicDropdown({ topics, onChange }) {
+function TopicDropdown({ topics, selectedTopic, onChange }) {
   return (
     <Dropdown onChange={onChange}>
       {topics &&
         topics.length > 0 &&
         topics.map(topic => (
-          <option key={topic} value={topic}>
+          <option
+            key={topic}
+            value={topic}
+            defaultValue={topic === selectedTopic}
+          >
             {topic}
           </option>
         ))}
@@ -18,6 +22,7 @@ function TopicDropdown({ topics, onChange }) {
 
 TopicDropdown.propTypes = {
   topics: PropTypes.array,
+  selectedTopic: PropTypes.string,
   onChange: PropTypes.func,
 };
 

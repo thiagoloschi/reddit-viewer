@@ -19,15 +19,17 @@ import reducer from './reducer';
 
 class HomePage extends React.PureComponent {
   static propTypes = {
-    posts: PropTypes.array,
+    posts: PropTypes.object,
     getPosts: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
     this.fetchNewTopic = this.fetchNewTopic.bind(this);
+    this.fetchMorePosts = this.fetchMorePosts.bind(this);
     this.state = {
       topics: ['hot', 'new', 'controversial', 'top', 'rising'],
+      selectedTopic: 'hot',
     };
   }
 
@@ -40,21 +42,47 @@ class HomePage extends React.PureComponent {
     if (!children || children.length <= 0) {
       getPosts();
     }
+
+    window.addEventListener('scroll', this.fetchMorePosts);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.fetchMorePosts);
   }
 
   fetchNewTopic({ target: { value } }) {
     this.props.getPosts(value);
+
+    this.setState({
+      selectedTopic: value,
+    });
+  }
+
+  fetchMorePosts() {
+    const {
+      posts: { after },
+      getPosts,
+    } = this.props;
+    const { selectedTopic } = this.state;
+    const { scrollTop, scrollHeight, offsetHeight } = document.documentElement;
+    if (scrollTop + offsetHeight === scrollHeight) {
+      getPosts(selectedTopic, after);
+    }
   }
 
   render() {
     const {
       posts: { children },
     } = this.props;
-    const { topics } = this.state;
+    const { topics, selectedTopic } = this.state;
 
     return (
       <>
-        <TopicDropdown topics={topics} onChange={this.fetchNewTopic} />
+        <TopicDropdown
+          selectedTopic={selectedTopic}
+          topics={topics}
+          onChange={this.fetchNewTopic}
+        />
         {children && children.length > 0 && <Posts posts={children} />}
       </>
     );
@@ -67,7 +95,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getPosts: (query, next) => dispatch(fetchPosts(query, next)),
+    getPosts: (query, after) => dispatch(fetchPosts(query, after)),
   };
 }
 
