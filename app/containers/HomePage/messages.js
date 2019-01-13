@@ -3,8 +3,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.HomePage';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'Reddit!',
+  searchbarPlaceholder: {
+    id: `${scope}.searchbarPlaceholder`,
+    defaultMessage: 'look for a topic!',
   },
 });

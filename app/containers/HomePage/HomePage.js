@@ -13,7 +13,7 @@ import injectReducer from 'utils/injectReducer';
 import Posts from 'components/PostFactory';
 import FiltersDropdown from 'components/FiltersDropdown';
 import SearchBar from 'components/SearchBar/SearchBar';
-import { FilterSection, Heading } from './look';
+import { NavigationBar, FilterSection, Heading } from './look';
 
 import { fetchPosts } from './actions';
 import {
@@ -117,20 +117,22 @@ class HomePage extends React.PureComponent {
 
     return (
       <>
-        <Heading>{`r/${topic}`}</Heading>
-        <FilterSection>
-          <SearchBar
-            name="search"
-            onSubmit={this.lookForATopic}
-            onChange={this.updateTopic}
-            placeholder="Look for a topic"
-          />
-          <FiltersDropdown
-            selectedFilter={selectedFilter}
-            filters={filters}
-            onChange={this.fetchWithFilter}
-          />
-        </FilterSection>
+        <NavigationBar>
+          <Heading>{`r/${topic}`}</Heading>
+          <FilterSection>
+            <SearchBar
+              name="search"
+              onSubmit={this.lookForATopic}
+              onChange={this.updateTopic}
+              placeholder="look for a topic"
+            />
+            <FiltersDropdown
+              selectedFilter={selectedFilter}
+              filters={filters}
+              onChange={this.fetchWithFilter}
+            />
+          </FilterSection>
+        </NavigationBar>
         <Posts error={error} isLoading={isLoading} posts={children} />
       </>
     );
