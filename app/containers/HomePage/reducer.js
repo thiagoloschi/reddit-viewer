@@ -4,25 +4,34 @@ import { FETCH_POSTS } from './constants';
 
 export const initialState = fromJS({
   isLoading: false,
-  error: null,
+  error: false,
   posts: {
     children: [],
     after: null,
   },
 });
 
-function handleFetchPostsSuccess(prevState, { data, shouldConcat }) {
-  const { children, after } = data;
+function handleFetchPosts(prevState, { data, shouldConcat, error }) {
+  if (error) {
+    return prevState.mergeDeep({
+      error: true,
+      posts: {
+        children: [],
+      },
+    });
+  }
+  const { children, after, dist } = data;
   if (shouldConcat === false) {
     return prevState.merge({
       posts: data,
     });
   }
+
   const posts = prevState.getIn(['posts', 'children']).toJS();
   return prevState.mergeDeep({
     posts: {
       children: posts.concat(children),
-      after,
+      after: dist >= 25 && after,
     },
   });
 }
@@ -32,10 +41,13 @@ function homeReducer(state = initialState, action) {
   switch (type) {
     case FETCH_POSTS:
       return handle(state, action, {
-        start: prevState => prevState.merge({ isLoading: true }),
+        start: prevState =>
+          prevState.mergeDeep({
+            isLoading: true,
+            error: false,
+          }),
         finish: prevState => prevState.merge({ isLoading: false }),
-        failure: prevState => prevState.merge({ error: payload }),
-        success: prevState => handleFetchPostsSuccess(prevState, payload),
+        success: prevState => handleFetchPosts(prevState, payload),
       });
     default:
       return state;

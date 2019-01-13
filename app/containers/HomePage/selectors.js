@@ -6,4 +6,10 @@ const selectHome = state => state.get('home', initialState);
 const makeSelectPosts = () =>
   createSelector(selectHome, homeState => homeState.get('posts').toJS());
 
-export { selectHome, makeSelectPosts };
+const makeSelectError = () =>
+  createSelector(selectHome, homeState => homeState.get('error'));
+
+const makeSelectIsLoading = () =>
+  createSelector(selectHome, homeState => homeState.get('isLoading'));
+
+export { selectHome, makeSelectPosts, makeSelectError, makeSelectIsLoading };
