@@ -10,6 +10,7 @@ function SearchBar({ onSubmit, onChange, placeholder, name }) {
         name={name}
         onChange={onChange}
         placeholder={placeholder}
+        autoComplete="off"
       />
     </form>
   );

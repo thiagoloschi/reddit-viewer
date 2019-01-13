@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PostCard from 'components/PostCard';
-import { List } from './look';
+import { List, Feedback } from './look';
 
 function PostFactory({ posts, error, isLoading }) {
   if (posts.length === 0 && isLoading) {
-    return <li>Loading...</li>;
+    return <Feedback>loading...</Feedback>;
   }
 
   if (error || posts.length === 0) {
-    return <li>Nothing found!</li>;
+    return <Feedback>Nothing found!</Feedback>;
   }
 
   return (
