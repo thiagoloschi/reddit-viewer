@@ -11,35 +11,48 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 
 import Posts from 'components/PostFactory';
-import TopicDropdown from 'components/TopicDropdown';
+import FiltersDropdown from 'components/FiltersDropdown';
+import SearchBar from 'components/SearchBar/SearchBar';
+import { FilterSection, Heading } from './look';
 
 import { fetchPosts } from './actions';
-import { makeSelectPosts } from './selectors';
+import {
+  makeSelectPosts,
+  makeSelectError,
+  makeSelectIsLoading,
+} from './selectors';
 import reducer from './reducer';
 
 class HomePage extends React.PureComponent {
   static propTypes = {
     posts: PropTypes.object,
     getPosts: PropTypes.func,
+    error: PropTypes.bool,
+    isLoading: PropTypes.bool,
   };
 
   constructor(props) {
     super(props);
-    this.fetchNewTopic = this.fetchNewTopic.bind(this);
+    this.lookForATopic = this.lookForATopic.bind(this);
+    this.updateTopic = this.updateTopic.bind(this);
+    this.fetchWithFilter = this.fetchWithFilter.bind(this);
     this.fetchMorePosts = this.fetchMorePosts.bind(this);
     this.state = {
-      topics: ['hot', 'new', 'controversial', 'top', 'rising'],
-      selectedTopic: 'hot',
+      filters: ['hot', 'new', 'controversial', 'top', 'rising'],
+      selectedFilter: 'hot',
+      topic: 'all',
     };
   }
 
   componentDidMount() {
     const {
       posts: { children },
+      error,
       getPosts,
     } = this.props;
+    const thereAreNoPosts = !children || children.length === 0;
 
-    if (!children || children.length <= 0) {
+    if (error === false && thereAreNoPosts) {
       getPosts();
     }
 
@@ -50,12 +63,33 @@ class HomePage extends React.PureComponent {
     window.removeEventListener('scroll', this.fetchMorePosts);
   }
 
-  fetchNewTopic({ target: { value } }) {
-    this.props.getPosts(value);
+  lookForATopic(event) {
+    event.preventDefault();
+    const { getPosts } = this.props;
+    const { topic, selectedFilter } = this.state;
+
+    if (topic !== '') {
+      getPosts(topic, selectedFilter);
+    }
+  }
+
+  updateTopic({ target: { value } }) {
+    this.setState({
+      topic: value,
+    });
+  }
+
+  fetchWithFilter({ target: { value } }) {
+    const { topic } = this.state;
+    const { getPosts } = this.props;
 
     this.setState({
-      selectedTopic: value,
+      selectedFilter: value,
     });
+
+    if (topic !== '') {
+      getPosts(topic, value);
+    }
   }
 
   fetchMorePosts() {
@@ -63,27 +97,41 @@ class HomePage extends React.PureComponent {
       posts: { after },
       getPosts,
     } = this.props;
-    const { selectedTopic } = this.state;
+    const { topic, selectedFilter } = this.state;
     const { scrollTop, scrollHeight, offsetHeight } = document.documentElement;
-    if (scrollTop + offsetHeight === scrollHeight) {
-      getPosts(selectedTopic, after);
+    const reachedTheBottom = scrollTop + offsetHeight === scrollHeight;
+    const thereAreMorePostsToFetch = after;
+
+    if (reachedTheBottom && thereAreMorePostsToFetch) {
+      getPosts(topic, selectedFilter, after);
     }
   }
 
   render() {
     const {
       posts: { children },
+      error,
+      isLoading,
     } = this.props;
-    const { topics, selectedTopic } = this.state;
+    const { filters, selectedFilter, topic } = this.state;
 
     return (
       <>
-        <TopicDropdown
-          selectedTopic={selectedTopic}
-          topics={topics}
-          onChange={this.fetchNewTopic}
-        />
-        {children && children.length > 0 && <Posts posts={children} />}
+        <Heading>{`r/${topic}`}</Heading>
+        <FilterSection>
+          <SearchBar
+            name="search"
+            onSubmit={this.lookForATopic}
+            onChange={this.updateTopic}
+            placeholder="Look for a topic"
+          />
+          <FiltersDropdown
+            selectedFilter={selectedFilter}
+            filters={filters}
+            onChange={this.fetchWithFilter}
+          />
+        </FilterSection>
+        <Posts error={error} isLoading={isLoading} posts={children} />
       </>
     );
   }
@@ -91,11 +139,13 @@ class HomePage extends React.PureComponent {
 
 const mapStateToProps = createStructuredSelector({
   posts: makeSelectPosts(),
+  error: makeSelectError(),
+  isLoading: makeSelectIsLoading(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getPosts: (query, after) => dispatch(fetchPosts(query, after)),
+    getPosts: (topic, sort, after) => dispatch(fetchPosts(topic, sort, after)),
   };
 }
 

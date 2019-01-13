@@ -1,10 +1,13 @@
-export function fetchPosts(topic = 'hot', after) {
+export function fetchPosts(topic = 'all', sort = 'hot', after) {
   const nextPage = after ? `?after=${after}` : '';
-  return fetch(`http://www.reddit.com/${topic}.json${nextPage}`)
+  const url = `http://www.reddit.com/r/${topic}/${sort}.json${nextPage}`;
+
+  return fetch(url)
     .then(response => response.json())
     .then(parsedData => {
       const parsedDataWithInfo = parsedData;
       parsedDataWithInfo.shouldConcat = !!after;
       return parsedDataWithInfo;
-    });
+    })
+    .catch(err => err);
 }
