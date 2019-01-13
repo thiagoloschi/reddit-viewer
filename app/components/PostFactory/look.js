@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const List = styled.ul`
-  padding: 0 2rem 1rem;
+  padding: 8rem 2rem 1rem;
   margin: 0;
   list-style: none;
 
@@ -11,5 +11,5 @@ export const List = styled.ul`
 `;
 
 export const Feedback = styled.p`
-  padding: 2rem;
+  padding: 10rem 2rem;
 `;

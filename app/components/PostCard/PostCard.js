@@ -27,14 +27,16 @@ function PostCard({ data }) {
     !thumbnail ||
     thumbnail === 'default' ||
     thumbnail === 'self' ||
-    thumbnail === 'spoiler'
+    thumbnail === 'spoiler' ||
+    thumbnail === 'image' ||
+    thumbnail === 'nsfw'
   );
 
   return (
     <Wrapper>
       <ScoreBar score={score} />
       <Card href={commentsLink}>
-        <div>
+        <section>
           <p>
             <DarkLink href={subredditLink}>{subreddit_name_prefixed}</DarkLink>{' '}
             • Posted by
@@ -42,7 +44,7 @@ function PostCard({ data }) {
             <Link href={commentsLink}>{createdAt}</Link>
           </p>
           <Title>{title}</Title>
-        </div>
+        </section>
         {isThereAThumbnail && (
           <Link href={url} title={url}>
             <Thumbnail
