@@ -46,7 +46,7 @@ npm run test
 <br />
 
 ### Live Demo
-You'll be able to see a [live demo](https://reddit-light-viewer.herokuapp.com/) of the application at Heroku: https://reddit-light-viewer.herokuapp.com/ as soon as I finish publishing it there.
+You'll be able to see a [live demo](https://reddit-light-viewer.herokuapp.com/) of the application at Heroku: https://reddit-light-viewer.herokuapp.com/.
 
 <br />
 
