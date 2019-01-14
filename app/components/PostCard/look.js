@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Wrapper = styled.section`
   display: flex;
   width: 100%;
-  max-width: 600px;
   margin: 0.5rem 0;
   border: 1px solid rgb(204, 204, 204);
   border-radius: 0.25rem;
