@@ -12,7 +12,7 @@ import injectReducer from 'utils/injectReducer';
 
 import Posts from 'components/PostFactory';
 import FiltersDropdown from 'components/FiltersDropdown';
-import SearchBar from 'components/SearchBar/SearchBar';
+import SearchBar from 'components/SearchBar';
 import { NavigationBar, FilterSection, Heading } from './look';
 
 import { fetchPosts } from './actions';
@@ -23,7 +23,7 @@ import {
 } from './selectors';
 import reducer from './reducer';
 
-class HomePage extends React.PureComponent {
+export class HomePage extends React.PureComponent {
   static propTypes = {
     posts: PropTypes.object,
     getPosts: PropTypes.func,
