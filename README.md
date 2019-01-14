@@ -23,9 +23,9 @@ Please refer to the [Pull requests](https://github.com/thiagoloschi/reddit-viewe
 <br />
 
 ### Running locally
-To run the project locally, first install the dependencies and then make sure to cache the webpack:
+To run the project locally, first install the dependencies:
 ```node
-npm install && npm run build:dll
+npm install
 ```
 
 Then, to run it in develop mode do:
