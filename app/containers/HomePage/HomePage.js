@@ -13,7 +13,13 @@ import injectReducer from 'utils/injectReducer';
 import Posts from 'components/PostFactory';
 import FiltersDropdown from 'components/FiltersDropdown';
 import SearchBar from 'components/SearchBar';
-import { NavigationBar, FilterSection, Heading } from './look';
+import {
+  NavigationBar,
+  FilterSection,
+  Heading,
+  Viewport,
+  ViewFrame,
+} from './look';
 
 import { fetchPosts } from './actions';
 import {
@@ -41,6 +47,7 @@ export class HomePage extends React.PureComponent {
       filters: ['hot', 'new', 'controversial', 'top', 'rising'],
       selectedFilter: 'hot',
       topic: 'all',
+      currentUrl: 'https://www.usatoday.com/story/opinion/2019/01/13/mounting-evidence-trump-fears-putin-compromising-information-column/2564892002/',
     };
   }
 
@@ -113,7 +120,7 @@ export class HomePage extends React.PureComponent {
       error,
       isLoading,
     } = this.props;
-    const { filters, selectedFilter, topic } = this.state;
+    const { filters, selectedFilter, topic, currentUrl } = this.state;
 
     return (
       <>
@@ -133,7 +140,10 @@ export class HomePage extends React.PureComponent {
             />
           </FilterSection>
         </NavigationBar>
-        <Posts error={error} isLoading={isLoading} posts={children} />
+        <Viewport>
+          <Posts error={error} isLoading={isLoading} posts={children} />
+          <ViewFrame title="viewer" src={currentUrl} />
+        </Viewport>
       </>
     );
   }

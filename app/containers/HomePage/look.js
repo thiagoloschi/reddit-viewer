@@ -16,3 +16,16 @@ export const NavigationBar = styled.nav`
   background-color: #333;
   color: white;
 `;
+
+export const Viewport = styled.section`
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const ViewFrame = styled.iframe`
+  width: 60%;
+  height: 85vh;
+  margin-top: 8.5rem;
+  border: 1px solid #333;
+  border-radius: 0.25rem;
+`;
