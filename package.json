@@ -1,16 +1,16 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.7.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "reddit-light-viewer",
+  "version": "1.0.0",
+  "description": "A light viwer for reddit",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "https://github.com/thiagoloschi/reddit-viewer"
   },
   "engines": {
-    "npm": ">=5",
-    "node": ">=8.10.0"
+    "npm": "6.4.1",
+    "node": "8.14.0"
   },
-  "author": "Max Stoiber",
+  "author": "Thiago Loschi",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",

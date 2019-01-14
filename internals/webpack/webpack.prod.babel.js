@@ -121,11 +121,11 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new WebpackPwaManifest({
-      name: 'React Boilerplate',
-      short_name: 'React BP',
-      description: 'My React Boilerplate-based project!',
-      background_color: '#fafafa',
-      theme_color: '#b1624d',
+      name: 'Reddit Light Viwer',
+      short_name: 'Reddit Viwer',
+      description: 'A light viwer for react',
+      background_color: '#ffffff',
+      theme_color: '#333333',
       inject: true,
       ios: true,
       icons: [
