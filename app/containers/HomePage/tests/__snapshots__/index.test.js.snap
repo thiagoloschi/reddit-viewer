@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomePage /> render should render correctly with the matching props 1`] = `
+<Fragment>
+  <look__NavigationBar>
+    <look__Heading>
+      r/all
+    </look__Heading>
+    <look__FilterSection>
+      <SearchBar
+        name="search"
+        onChange={[Function]}
+        onSubmit={[Function]}
+        placeholder="look for a topic"
+      />
+      <FiltersDropdown
+        filters={
+          Array [
+            "hot",
+            "new",
+            "controversial",
+            "top",
+            "rising",
+          ]
+        }
+        onChange={[Function]}
+        selectedFilter="hot"
+      />
+    </look__FilterSection>
+  </look__NavigationBar>
+  <PostFactory
+    error={false}
+    isLoading={false}
+    posts={
+      Array [
+        Object {
+          "data": Object {
+            "author": "namraka",
+            "created": 1547059800,
+            "created_utc": 1547031000,
+            "id": "ae5q0v",
+            "num_comments": 1290,
+            "num_crossposts": 42,
+            "permalink": "/r/gifs/comments/ae5q0v/nobody_noticed_just_act_normal/",
+            "score": 90494,
+            "subreddit": "gifs",
+            "subreddit_id": "t5_2qt55",
+            "subreddit_name_prefixed": "r/gifs",
+            "thumbnail": "https://b.thumbs.redditmedia.com/4X6iAiWpar-2hfQUaPhLLhzGBEd4NW2X6piBlOkGkJA.jpg",
+            "thumbnail_height": 140,
+            "thumbnail_width": 140,
+            "title": "Nobody noticed, just act normal",
+            "ups": 90494,
+            "url": "https://v.redd.it/je38z1kund921",
+          },
+        },
+      ]
+    }
+  />
+</Fragment>
+`;

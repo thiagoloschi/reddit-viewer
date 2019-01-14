@@ -38,8 +38,8 @@ function PostCard({ data }) {
       <Card href={commentsLink}>
         <section>
           <p>
-            <DarkLink href={subredditLink}>{subreddit_name_prefixed}</DarkLink>{' '}
-            • Posted by
+            <DarkLink href={subredditLink}>{subreddit_name_prefixed}</DarkLink>
+            {' • Posted by '}
             <Link href={authorLink}> {authorPath} </Link>
             <Link href={commentsLink}>{createdAt}</Link>
           </p>
