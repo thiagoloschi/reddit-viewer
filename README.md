@@ -1,4 +1,4 @@
-# Luxury Store
+# Reddit Light Viewer
 
 1. [Description](#description)
 2. [Technologies](#technologies)
